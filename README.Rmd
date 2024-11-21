@@ -42,4 +42,4 @@ This applied example was made in the Dry Forest of Colombia:
 ## Some plots 
 
 ## View the HTML file
-[click here to view the HTML file] (https://github.com/AndresHerrera2023/beewebs.git/1.html)
+[click here to view the HTML file] (https://github.com/AndresHerrera2023/beewebs/blob/main/1.html)
