@@ -1,39 +1,34 @@
 ---
-
 authors: "Jennifer Ramos, Andres Herrera, Anahi Quezada"
 date: "2024-11-14"
 output:
-  code and figures 
+  pdf_document 
 ---
+
 ## Github Workshop
 ## Interaction web
 
-This is an R code  <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Interaction network analyses are a useful tool to understand the complex tropic relationships between two or more species. Bipartite networks are generally used, which present only two tropic levels. These networks quantify the number and intensity of interactions between the two tropic levels, allowing to visualize and quantify which species in a community have a greater relative interaction than the other species. In this case, we present the interaction networks between several bees from different dry forests at the tribe scale versus the plant families they visit. In this example we show two types of networks: the bipartite networks (plot web) where the linear interactions between the two tropic levels are presented and the matrix (visweb) where the intensity of the interaction between the tropic levels is shown with predetermined colors.
 
 
-```{r setup, include=FALSE}
-input <- list.files(path = "C:/input/",
-                n = ".csv$", 
-                full.names = T)
-names <- list.files(path = "C:/input/", 
-                  pattern = ".csv$", 
-                  full.names = F)
-Finalnam <- paste0("C:/metrics_",nam) #Create output folder
+```{r setup, eval=FALSE}
+input <- list.files(path = "C:/input/", pattern = ".csv$", full.names = TRUE)
+names <- list.files(path = "C:/input/", pattern = ".csv$", full.names = FALSE)
+Finalnam <- paste0("C:/metrics_", names) # Create output folder
 
-for (i in 1:length(input)){
-  matrix <- read.csv(D[i])
+for (i in 1:length(input)) {
+  matrix <- read.csv(input[i]) # Corrected variable name
   matrix <- as.data.frame(matrix)
   matrix <- matrix %>%
     group_by(Tribe) %>%
-    summarise(across(everything(), sum, na.rm=TRUE))
-  matriz_values <- matrix[,2:length(matrix)]
-  final_values = as.matrix(matriz_values)
-  rownames(final_values) = matriz$Tribe
-  net <-networklevel(final_values)
+    summarise(across(everything(), sum, na.rm = TRUE))
+  matriz_values <- matrix[, 2:ncol(matrix)]
+  final_values <- as.matrix(matriz_values)
+  rownames(final_values) <- matrix$Tribe
+  net <- networklevel(final_values) # Ensure networklevel() is defined
   write.csv(net, Finalnam[i], row.names = TRUE)
 }
+
 ```
 
 
@@ -41,8 +36,8 @@ for (i in 1:length(input)){
 
 This applied example was made in the Dry Forest of Colombia:
 
-![Study Area](path/to/your/image.jpg)
+![Study Area](C:/Users/asque/Downloads/IMG_20241120_163851_425.jpg)
 
 
-##Some plots 
+## Some plots 
 
