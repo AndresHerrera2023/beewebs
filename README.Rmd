@@ -1,0 +1,48 @@
+---
+
+authors: "Jennifer Ramos, Andres Herrera, Anahi Quezada"
+date: "2024-11-14"
+output:
+  code and figures 
+---
+## Github Workshop
+## Interaction web
+
+This is an R code  <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+```{r setup, include=FALSE}
+input <- list.files(path = "C:/input/",
+                n = ".csv$", 
+                full.names = T)
+names <- list.files(path = "C:/input/", 
+                  pattern = ".csv$", 
+                  full.names = F)
+Finalnam <- paste0("C:/metrics_",nam) #Create output folder
+
+for (i in 1:length(input)){
+  matrix <- read.csv(D[i])
+  matrix <- as.data.frame(matrix)
+  matrix <- matrix %>%
+    group_by(Tribe) %>%
+    summarise(across(everything(), sum, na.rm=TRUE))
+  matriz_values <- matrix[,2:length(matrix)]
+  final_values = as.matrix(matriz_values)
+  rownames(final_values) = matriz$Tribe
+  net <-networklevel(final_values)
+  write.csv(net, Finalnam[i], row.names = TRUE)
+}
+```
+
+
+## Study area
+
+This applied example was made in the Dry Forest of Colombia:
+
+![Study Area](path/to/your/image.jpg)
+
+
+##Some plots 
+
